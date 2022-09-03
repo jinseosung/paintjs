@@ -64,3 +64,8 @@ body {
 .controls .controls__range {
   margin-bottom: 30px;
 }
+
+.controls__color-range {
+  margin: auto;
+  margin-left: 20px;
+}

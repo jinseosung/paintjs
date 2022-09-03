@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const colorRange = document.getElementById("jsColorRange");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
@@ -41,7 +42,14 @@ function onMouseMove(event) {
 }
 
 function handleColorClick(event) {
-  const color = event.target.style.backgroundColor;
+  const color = event.target.dataset.color;
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  colorRange.value = color;
+}
+
+function onColorChange(event) {
+  const color = event.target.value;
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
 }
@@ -91,6 +99,8 @@ if (canvas) {
 Array.from(colors).forEach((color) =>
   color.addEventListener("click", handleColorClick)
 );
+
+colorRange.addEventListener("change", onColorChange);
 
 if (range) {
   range.addEventListener("input", handleRangeChange);
