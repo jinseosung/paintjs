@@ -4,6 +4,8 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const eraserBtn = document.getElementById("jsEraser");
+const resetBtn = document.getElementById("jsReset");
 const colorRange = document.getElementById("jsColorRange");
 
 const INITIAL_COLOR = "#2c2c2c";
@@ -87,6 +89,16 @@ function handleSaveClick() {
   link.click();
 }
 
+function handleEraserClick() {
+  ctx.strokeStyle = "white";
+  filling = false;
+  mode.innerText = "Fill";
+}
+
+function handleResetClick() {
+  ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -112,4 +124,12 @@ if (mode) {
 
 if (saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
+}
+
+if (eraserBtn) {
+  eraserBtn.addEventListener("click", handleEraserClick);
+}
+
+if (resetBtn) {
+  resetBtn.addEventListener("click", handleResetClick);
 }
