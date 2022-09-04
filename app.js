@@ -6,6 +6,8 @@ const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
 const eraserBtn = document.getElementById("jsEraser");
 const resetBtn = document.getElementById("jsReset");
+const fileInput = document.getElementById("jsFile");
+const textInput = document.getElementById("jsText");
 const colorRange = document.getElementById("jsColorRange");
 
 const INITIAL_COLOR = "#2c2c2c";
@@ -19,6 +21,7 @@ ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
+ctx.lineCap = "round";
 
 let painting = false;
 let filling = false;
@@ -99,6 +102,32 @@ function handleResetClick() {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 
+function onFileChange(event) {
+  const file = event.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = () => {
+    ctx.drawImage(image, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    fileInput.value = null;
+  };
+}
+
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text === null) {
+    return;
+  }
+
+  ctx.save();
+  const x = event.offsetX;
+  const y = event.offsetY;
+  ctx.font = "48px Apple";
+  ctx.lineWidth = 1;
+  ctx.fillText(text, x, y);
+  ctx.restore();
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -132,4 +161,12 @@ if (eraserBtn) {
 
 if (resetBtn) {
   resetBtn.addEventListener("click", handleResetClick);
+}
+
+if (fileInput) {
+  fileInput.addEventListener("change", onFileChange);
+}
+
+if (canvas) {
+  canvas.addEventListener("dblclick", onDoubleClick);
 }

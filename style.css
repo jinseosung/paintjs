@@ -43,6 +43,12 @@ body {
   text-transform: uppercase;
   font-weight: 800;
   font-size: 12px;
+  transition: background-color 300ms ease-out;
+}
+
+.controls__btns button:hover {
+  background-color: #ffd700;
+  color: black;
 }
 
 .controls__btns button:active {
@@ -59,6 +65,7 @@ body {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.2), 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 200ms ease-out;
 }
 
 .controls .controls__range {
@@ -68,4 +75,9 @@ body {
 .controls__color-range {
   margin: auto;
   margin-left: 8px;
+}
+
+.controls__colors .controls__color:hover,
+.controls__colors .controls__color-range:hover {
+  transform: scale(1.05);
 }
