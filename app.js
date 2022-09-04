@@ -99,6 +99,10 @@ function handleEraserClick() {
 }
 
 function handleResetClick() {
+  const value = confirm("Are you sure ?");
+  if (!value) {
+    return;
+  }
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 
